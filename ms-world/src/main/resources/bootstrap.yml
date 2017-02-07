@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ms-world
+
+log:
+  path: D:\logs
