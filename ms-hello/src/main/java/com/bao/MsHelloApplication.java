@@ -30,6 +30,12 @@ public class MsHelloApplication {
 		return "hello ";
 	}
 
+	@GetMapping("/exception")
+	public String exception() throws Exception {
+		log.info("exception");
+		throw new Exception();
+	}
+
 
 
 	public static void main(String[] args) {
