@@ -28,6 +28,7 @@
         <module>ms-eureka</module>
         <module>ms-hello</module>
         <module>ms-world</module>
+        <module>ms-oauth</module>
     </modules>
 
     <dependencies>

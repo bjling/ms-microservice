@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ms-oauth
+    instance_id: 1
+#  profiles:
+#    active: dev
+#  cloud:
+#    config:
+#      uri: http://localhost:9003
