@@ -18,17 +18,6 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @Configuration
 @EnableAuthorizationServer
 public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
-
-    @Autowired
-    private TokenStore tokenStore;
-
-//    @Autowired
-//    private UserApprovalHandler userApprovalHandler;
-
-    @Autowired
-//    @Qualifier("authenticationManagerBean")
-    private AuthenticationManager authenticationManager;
-
 //    @Autowired
 //    private DataSource dataSource;
 
@@ -39,14 +28,14 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore)
+        endpoints.tokenStore(tokenStore())
 //                .userApprovalHandler(userApprovalHandler)
                 .authenticationManager(authenticationManager);
     }
 
     //password grants are switched on by injecting an AuthenticationManager
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -60,12 +49,10 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
 //        clients.jdbc(DataSource);
     }
 
-
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer)
             throws Exception {
         oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
                 "isAuthenticated()");
-//        oauthServer.realm("sparklr2/client");
     }
 }

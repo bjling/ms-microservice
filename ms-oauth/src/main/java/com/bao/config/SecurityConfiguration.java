@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //            list.add(new SimpleGrantedAuthority("USER"));
 //            return  new MyUser("ss","22",list);
 //        });
-        auth.inMemoryAuthentication().withUser("marissa").password("koala").roles("USER").authorities("write").and().withUser("paul")
+            auth.inMemoryAuthentication().withUser("marissa").password("koala").roles("USER").authorities("write").and().withUser("paul")
                 .password("emu").roles("USER");
     }
 
