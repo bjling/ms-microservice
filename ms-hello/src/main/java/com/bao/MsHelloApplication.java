@@ -1,5 +1,7 @@
 package com.bao;
 
+import com.bao.exception.BaseException;
+import com.bao.exception.constant.ExceptionLevelEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -48,6 +50,11 @@ public class MsHelloApplication {
         };
     }
 
+    @GetMapping("/base")
+    public String base() {
+        log.info("exception");
+        throw new BaseException("ms-hello","1001","base exception",ExceptionLevelEnum.Middle);
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(MsHelloApplication.class, args);

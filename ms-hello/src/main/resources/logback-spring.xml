@@ -64,6 +64,8 @@
                         "thread": "%thread",
                         "class": "%logger{40}",
                         "rest": "%message"
+                        <!--,-->
+                        <!--"exception":${LOG_EXCEPTION_CONVERSION_WORD}-->
                         }
                     </pattern>
                 </pattern>
