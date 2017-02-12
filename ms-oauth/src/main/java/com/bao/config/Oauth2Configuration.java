@@ -1,6 +1,7 @@
 package com.bao.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,9 +18,14 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
  */
 @Configuration
 @EnableAuthorizationServer
-public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
+public class Oauth2Configuration extends AuthorizationServerConfigurerAdapter {
 //    @Autowired
 //    private DataSource dataSource;
+
+    //password grants are switched on by injecting an AuthenticationManager
+    @Autowired
+    @Qualifier("authenticationManagerBean")
+    private AuthenticationManager authenticationManager;
 
     @Bean
     public TokenStore tokenStore() {
@@ -32,10 +38,6 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
 //                .userApprovalHandler(userApprovalHandler)
                 .authenticationManager(authenticationManager);
     }
-
-    //password grants are switched on by injecting an AuthenticationManager
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {

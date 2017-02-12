@@ -5,7 +5,6 @@ server:
 security:
   oauth2:
     client:
-      access-token-uri: http://localhost:9004/oauth/check_token
-    authorization:
-      check-token-access: http://localhost:9004/oauth/check_token
+      access-token-uri: http://localhost:9004/oauth/token
+      user-authorization-uri: http://localhost:9004/oauth/authorize
 
