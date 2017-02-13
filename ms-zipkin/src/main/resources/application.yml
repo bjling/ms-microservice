@@ -1,0 +1,17 @@
+server:
+  port: 9411
+  tomcat:
+    uri-encoding: utf-8
+
+#log
+logging:
+  path: /data/logs/
+  level:
+    root: info
+
+spring:
+  rabbitmq:
+    host: 172.18.18.102 # RabbitMQ host.
+    username: admin # Login user to authenticate to the broker.
+    password: 123qazWSX
+    port: 5672

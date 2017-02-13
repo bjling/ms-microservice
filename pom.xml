@@ -6,7 +6,7 @@
     <groupId>com.bao</groupId>
     <artifactId>ms-microservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>ms-microservice</name>
     <description>Demo project for Spring Boot</description>
@@ -29,6 +29,7 @@
         <module>ms-hello</module>
         <module>ms-world</module>
         <module>ms-oauth</module>
+        <module>ms-zipkin</module>
     </modules>
 
     <dependencies>
