@@ -5,3 +5,9 @@
 #### 4、logstash日志收集
 #### 5、全局异常处理
 #### 6、资源服务认证
+
+## ms-hello
+#### exception handle
+#### aspect handle
+#### annotation define
+#### oauth2.0 security validate
