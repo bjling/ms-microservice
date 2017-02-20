@@ -11,3 +11,7 @@
 #### aspect handle
 #### annotation define
 #### oauth2.0 security validate
+#### logstash
+http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html
+#### PriorityBlockingQueue
+

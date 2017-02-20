@@ -11,7 +11,7 @@
     <property name="CONSOLE_LOG_PATTERN"
               value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
-    <property name="LOG_FILE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN} ${sys:PID} --- [%t] %c{1.} : %m%n${LOG_EXCEPTION_CONVERSION_WORD}"></property>
+    <property name="LOG_FILE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN} ${PID} --- [%15.15t]%-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD}"></property>
 
     <!-- Appender to log to console -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -63,6 +63,7 @@
                         "pid": "${PID:-}",
                         "thread": "%thread",
                         "class": "%logger{40}",
+                        "exception":"%exception-conversion-word",
                         "rest": "%message"
                         }
                     </pattern>
