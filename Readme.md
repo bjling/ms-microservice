@@ -16,3 +16,5 @@ http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logg
 #### PriorityBlockingQueue
 #### Schedule
 http://blog.csdn.net/applebomb/article/details/52400154
+#### Google guava
+http://ifeve.com/google-guava/
