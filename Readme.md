@@ -14,4 +14,5 @@
 #### logstash
 http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html
 #### PriorityBlockingQueue
-
+#### Schedule
+http://blog.csdn.net/applebomb/article/details/52400154
