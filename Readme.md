@@ -5,6 +5,7 @@
 #### 4、logstash日志收集
 #### 5、全局异常处理
 #### 6、资源服务认证
+#### 7、RabbitMQ --未添加
 
 ## ms-hello
 #### exception handle
