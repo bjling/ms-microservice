@@ -22,7 +22,7 @@ public class MyProcessor{
 
 //    @Scheduled(cron = "0/5 * * * * ?}")
 //    @Scheduled(fixedRate = 5000)
-    @Scheduled(fixedDelay = 5000)
+//    @Scheduled(fixedDelay = 5000)
     public void process() {
         try {
             if(index > delays.length - 1){

@@ -19,3 +19,5 @@ http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logg
 http://blog.csdn.net/applebomb/article/details/52400154
 #### Google guava
 http://ifeve.com/google-guava/
+#### Email
+http://blog.csdn.net/sdmxdzb/article/details/40737931
