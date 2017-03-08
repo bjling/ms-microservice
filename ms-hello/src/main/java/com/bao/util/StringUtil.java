@@ -41,5 +41,10 @@ public class StringUtil {
 
         integers.forEach(model -> System.out.println(model.getNumber()));
 
+        List<String> strings = new ArrayList<>();
+        strings.add("11");
+        System.out.println(strings.removeAll(null));
+
+
     }
 }
