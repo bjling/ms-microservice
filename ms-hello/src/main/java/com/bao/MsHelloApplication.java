@@ -2,11 +2,15 @@ package com.bao;
 
 import com.bao.exception.BaseException;
 import com.bao.exception.constant.ExceptionLevelEnum;
+import com.bao.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -21,7 +25,12 @@ import java.util.concurrent.Callable;
 @Slf4j
 @SpringBootApplication
 @EnableScheduling
+@EnableHystrixDashboard
+//@EnableDiscoveryClient
 public class MsHelloApplication {
+
+    @Autowired
+    TestService testService;
 
     @Bean
     RestTemplate restTemplate() {
@@ -65,6 +74,11 @@ public class MsHelloApplication {
     public String auth() {
         log.info("auth");
         return "auth";
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return testService.test();
     }
 
     public static void main(String[] args) {
