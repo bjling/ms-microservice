@@ -3,4 +3,4 @@ spring:
     name: ms-world
 
 log:
-  path: D:\logs
+  path: /Users/baochunyu/Downloads/logs

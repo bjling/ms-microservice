@@ -6,6 +6,8 @@
 #### 5、全局异常处理
 #### 6、资源服务认证
 #### 7、RabbitMQ --未添加
+#### 8、zuul智能路由
+#### 9、turbine测量指标
 
 ## ms-hello
 #### exception handle

@@ -3,4 +3,4 @@ spring:
     name: ms-hello
 
 log:
-  path: D:\logs
+  path: /Users/baochunyu/Downloads/logs
