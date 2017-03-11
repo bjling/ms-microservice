@@ -3,6 +3,7 @@ package com.bao;
 import com.bao.exception.BaseException;
 import com.bao.exception.constant.ExceptionLevelEnum;
 import com.bao.service.TestService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -25,8 +26,9 @@ import java.util.concurrent.Callable;
 @Slf4j
 @SpringBootApplication
 @EnableScheduling
+@EnableHystrix
 @EnableHystrixDashboard
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 public class MsHelloApplication {
 
     @Autowired
@@ -40,6 +42,7 @@ public class MsHelloApplication {
     @Autowired
     RestTemplate restTemplate;
 
+    @HystrixCommand
     @GetMapping("/hello")
     public String hello() {
         String world = restTemplate.getForObject("http://localhost:10002/world", String.class);
