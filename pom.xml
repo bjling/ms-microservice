@@ -32,6 +32,7 @@
         <module>ms-zipkin</module>
         <module>ms-turbine</module>
         <module>ms-gateway</module>
+        <module>ms-sharding</module>
     </modules>
 
     <dependencies>
