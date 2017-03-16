@@ -15,20 +15,20 @@ defaultDataSourceName: sharding-0
 tables:
 
   t_order:
-    actualTables: t_order_${0..1}
+    actualTables: t_order_${0..3}
 #    tableStrategy: &table001
     tableStrategy:
       shardingColumns: user_id
-      algorithmExpression: t_order_${user_id.longValue() % 2}
+      algorithmExpression: t_order_${user_id.longValue() % 4}
 #      algorithmClassName: com.bao.algorithm.ModuloTableShardingAlgorithm
 
   #绑定表中其余的表的策略与t_order的策略相同
   t_order_item:
-    actualTables: t_order_item_${0..1}
+    actualTables: t_order_item_${0..3}
 #    tableStrategy: *table001
     tableStrategy:
       shardingColumns: user_id
-      algorithmExpression: t_order_item_${user_id.longValue() % 2}
+      algorithmExpression: t_order_item_${user_id.longValue() % 4}
 
 bindingTables:
   - tableNames: t_order,t_order_item
