@@ -1,13 +1,10 @@
 package com.bao.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -15,9 +12,9 @@ import java.sql.SQLException;
 /**
  * Created by baochunyu on 2017/3/12.
  */
-@Configuration
-@ConfigurationProperties("shard.db")
-@Data
+//@Configuration
+//@ConfigurationProperties("shard.db")
+//@Data
 public class ShardingJdbcConfig {
     private String url;
     private String userName;
@@ -36,7 +33,7 @@ public class ShardingJdbcConfig {
     private Integer maxPoolPreparedStatementPerConnectionSize;
     private String filters;
 
-    @Bean(initMethod = "init" ,destroyMethod = "close")
+//    @Bean(initMethod = "init" ,destroyMethod = "close")
     public DataSource dataSource(){
         return createDataSource("");
     }

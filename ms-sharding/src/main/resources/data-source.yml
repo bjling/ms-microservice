@@ -1,0 +1,37 @@
+dataSource:
+  sharding-01: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sharding-01
+    username: root
+    password: 123456
+  sharding-02: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sharding-02
+    username: root
+    password: 123456
+#默认数据源，未配置分片规则的表将通过默认数据源定位
+defaultDataSourceName: sharding-01
+
+tables:
+
+  t_order:
+    actualTables: t_order_${0..3}
+    tableStrategy: &table001
+      shardingColumns: user_id
+#      algorithmExpression: t_order_${user_id.intValue() % 4}
+      algorithmClassName: com.bao.algorithm.ModuloTableShardingAlgorithm
+
+  #绑定表中其余的表的策略与t_order的策略相同
+  t_order_item:
+    actualTables: t_order_item_${0..3}
+    tableStrategy: *table001
+
+bindingTables:
+  - tableNames: t_order,t_order_item
+
+defaultDatabaseStrategy:
+  shardingColumns: none
+  algorithmClassName: com.dangdang.ddframe.rdb.sharding.api.strategy.database.NoneDatabaseShardingAlgorithm
+
+props:
+  metrics.enable: false

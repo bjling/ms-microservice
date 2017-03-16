@@ -35,6 +35,11 @@
 			<artifactId>sharding-jdbc-core</artifactId>
 			<version>1.4.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.dangdang</groupId>
+			<artifactId>sharding-jdbc-config-yaml</artifactId>
+			<version>1.4.0</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
 		<dependency>
