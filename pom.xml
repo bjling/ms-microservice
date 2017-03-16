@@ -33,6 +33,7 @@
         <module>ms-turbine</module>
         <module>ms-gateway</module>
         <module>ms-sharding</module>
+        <module>ms-rocketmq</module>
     </modules>
 
     <dependencies>
