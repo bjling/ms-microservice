@@ -1,0 +1,25 @@
+server:
+  port: 9005
+
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  zipkin:
+    enabled: false
+  application:
+    name: ms-netty
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+#          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 20000
