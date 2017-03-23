@@ -2,10 +2,21 @@ server:
   port: 9003
 
 
-
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+spring:
+  zipkin:
+    enabled: false
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+#          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 20000

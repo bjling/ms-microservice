@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
     @GetMapping("/world")
-    @HystrixCommand
-    public String world(){
-        log.info("world");
+//    @HystrixCommand
+    public String world() {
+        log.info("===================world");
+        try {
+            Thread.sleep(40000);
+        } catch (InterruptedException e) {
+            log.info("===================hehe");
+            e.printStackTrace();
+        }
         return "world";
     }
 }
