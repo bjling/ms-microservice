@@ -4,18 +4,19 @@ import com.bao.exception.BaseException;
 import com.bao.exception.constant.ExceptionLevelEnum;
 import com.bao.service.TestService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import feign.Retryer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancedRetryPolicyFactory;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -25,10 +26,11 @@ import java.util.concurrent.Callable;
 @RestController
 @Slf4j
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 @EnableHystrix
 @EnableHystrixDashboard
 @EnableDiscoveryClient
+@EnableFeignClients
 public class MsHelloApplication {
 
     @Autowired
@@ -84,7 +86,17 @@ public class MsHelloApplication {
         return testService.test();
     }
 
+
     public static void main(String[] args) {
         SpringApplication.run(MsHelloApplication.class, args);
     }
+
+//    @Bean
+//    @Primary
+//    @ConditionalOnClass(name = "org.springframework.retry.support.RetryTemplate")
+//    public LoadBalancedRetryPolicyFactory loadBalancedRetryPolicyFactory() {
+//        return new LoadBalancedRetryPolicyFactory.NeverRetryFactory();
+//    }
+//
+
 }
