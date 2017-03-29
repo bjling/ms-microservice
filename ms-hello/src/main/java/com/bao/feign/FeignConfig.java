@@ -1,6 +1,7 @@
 package com.bao.feign;
 
 import feign.Logger;
+import feign.Request;
 import feign.Retryer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -17,10 +18,10 @@ public class FeignConfig {
         return Retryer.NEVER_RETRY;
     }
 
-//    @Bean
-//    Request.Options options() {
-//        return new Request.Options(1000, 30*1000);
-//    }
+    @Bean
+    Request.Options options() {
+        return new Request.Options(1000, 30*1000);
+    }
 
 //    @Bean
 //    Logger.Level feignLoggerLevel() {

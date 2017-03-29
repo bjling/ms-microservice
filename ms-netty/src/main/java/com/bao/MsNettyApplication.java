@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@EnableDiscoveryClient
+@EnableEurekaClient
+@EnableFeignClients
 @SpringBootApplication
 public class MsNettyApplication {
 
@@ -21,7 +24,7 @@ public class MsNettyApplication {
 	public String world() {
 		log.info("===================world");
 		try {
-			Thread.sleep(40000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			log.info("===================hehe");
 			e.printStackTrace();
@@ -36,6 +39,13 @@ public class MsNettyApplication {
 //    @HystrixCommand
 	public String retry() {
 		testService.service();
+		return "world";
+	}
+
+	@GetMapping("/retry1")
+//    @HystrixCommand
+	public String retry1() {
+		testService.service1();
 		return "world";
 	}
 

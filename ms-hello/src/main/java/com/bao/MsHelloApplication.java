@@ -4,6 +4,7 @@ import com.bao.exception.BaseException;
 import com.bao.exception.constant.ExceptionLevelEnum;
 import com.bao.service.TestService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import feign.Request;
 import feign.Retryer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class MsHelloApplication {
     @GetMapping("/base")
     public String base() {
         log.info("exception");
-        throw new BaseException("ms-hello","1001","base exception",ExceptionLevelEnum.Middle);
+        throw new BaseException("ms-hello", "1001", "base exception", ExceptionLevelEnum.Middle);
     }
 
     @GetMapping("/auth")
@@ -91,12 +92,22 @@ public class MsHelloApplication {
         SpringApplication.run(MsHelloApplication.class, args);
     }
 
-//    @Bean
+    //    @Bean
 //    @Primary
 //    @ConditionalOnClass(name = "org.springframework.retry.support.RetryTemplate")
 //    public LoadBalancedRetryPolicyFactory loadBalancedRetryPolicyFactory() {
 //        return new LoadBalancedRetryPolicyFactory.NeverRetryFactory();
 //    }
 //
+    @Bean
+    @Primary
+    Retryer retryer() {
+        return Retryer.NEVER_RETRY;
+    }
+
+    @Bean
+    Request.Options options() {
+        return new Request.Options(3000, 30 * 1000);
+    }
 
 }

@@ -9,13 +9,17 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-    enabled: false
+#    enabled: false
 
 spring:
   zipkin:
     enabled: false
   application:
     name: ms-netty
+
+#feign:
+#  hystrix:
+#    enabled: false
 
 hystrix:
   command:

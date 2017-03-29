@@ -1,23 +1,32 @@
 server:
-  port: 9003
+  port: 9006
 
 
 eureka:
   instance:
     prefer-ip-address: true
-    health-check-url-path: /heath
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-spring:
-  zipkin:
-    enabled: false
 
 hystrix:
   command:
     default:
       execution:
         isolation:
-#          strategy: SEMAPHORE
           thread:
-            timeoutInMilliseconds: 20000
+            timeoutInMilliseconds: 60000
+
+
+# not effect
+#feign:
+#  hystrix:
+#    enabled: false
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+spring:
+  application:
+    name: ms-gateway
+
