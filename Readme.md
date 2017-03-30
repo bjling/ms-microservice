@@ -25,3 +25,5 @@ http://blog.csdn.net/applebomb/article/details/52400154
 http://ifeve.com/google-guava/
 #### Email
 http://blog.csdn.net/sdmxdzb/article/details/40737931
+#### netty
+http://ifeve.com/netty5-user-guide/

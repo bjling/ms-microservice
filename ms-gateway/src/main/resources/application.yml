@@ -29,4 +29,6 @@ ribbon:
 spring:
   application:
     name: ms-gateway
-
+logging:
+  level:
+    root: debug

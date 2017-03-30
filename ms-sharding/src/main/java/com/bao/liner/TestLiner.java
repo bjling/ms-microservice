@@ -23,12 +23,12 @@ public class TestLiner implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
 
-        for (int i = 1; i < 6; i++){
-            TOrder order = TOrder.builder().userId(i).orderId(i).orderName("order"+i).build();
-            TOrderItem item = TOrderItem.builder().itemId(i).userId(i).orderId(i).itemName("item"+i).build();
-            orderMapper.insert(order);
-            itemMapper.insert(item);
-        }
+//        for (int i = 1; i < 6; i++){
+//            TOrder order = TOrder.builder().userId(i).orderId(i).orderName("order"+i).build();
+//            TOrderItem item = TOrderItem.builder().itemId(i).userId(i).orderId(i).itemName("item"+i).build();
+//            orderMapper.insert(order);
+//            itemMapper.insert(item);
+//        }
 
     }
 }
