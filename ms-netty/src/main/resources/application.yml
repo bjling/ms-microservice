@@ -16,6 +16,9 @@ spring:
     enabled: false
   application:
     name: ms-netty
+  boot:
+    admin:
+      context-path: /admin/manange
 
 #feign:
 #  hystrix:

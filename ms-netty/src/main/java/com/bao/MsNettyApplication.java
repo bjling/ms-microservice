@@ -1,6 +1,7 @@
 package com.bao;
 
 import com.bao.retry.TestService;
+import de.codecentric.boot.admin.config.EnableAdminServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableEurekaClient
 @EnableFeignClients
 @SpringBootApplication
+@EnableAdminServer
 public class MsNettyApplication {
 
 	@GetMapping("/netty")

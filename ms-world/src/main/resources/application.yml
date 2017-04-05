@@ -21,3 +21,6 @@ hystrix:
 #          strategy: SEMAPHORE
           thread:
             timeoutInMilliseconds: 20000
+management:
+  security:
+    enabled: false
