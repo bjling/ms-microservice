@@ -35,6 +35,7 @@
         <module>ms-sharding</module>
         <module>ms-spring-batch</module>
         <module>ms-netty</module>
+        <module>ms-ff4j</module>
     </modules>
 
     <dependencies>

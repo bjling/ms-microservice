@@ -13,6 +13,8 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 @Slf4j
 @RestController
 @EnableEurekaClient
@@ -40,6 +42,10 @@ public class MsNettyApplication {
 	@GetMapping("/retry")
 //    @HystrixCommand
 	public String retry() {
+
+		ConcurrentHashMap map = new ConcurrentHashMap();
+		map.put("test","test");
+
 		testService.service();
 		return "world";
 	}
