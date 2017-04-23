@@ -12,6 +12,31 @@ eureka:
 spring:
   zipkin:
     enabled: false
+#  jackson:
+#    date-format: java.text.SimpleDateFormat
+#  http:
+#    converters:
+#      preferred-json-mapper: gson
+
+
+shard:
+  db:
+    url: jdbc:mysql://localhost:3306/sharding-01?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    userName: root
+    password: 123456
+    initialSize: 1
+    minIdle: 1
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat
 
 hystrix:
   command:
@@ -21,6 +46,13 @@ hystrix:
 #          strategy: SEMAPHORE
           thread:
             timeoutInMilliseconds: 20000
-management:
-  security:
-    enabled: false
+#management:
+#  security:
+#    enabled: false
+#security:
+#  basic:
+#    enabled: false
+
+mybatis:
+  type-aliases-package: com.bao.model
+  mapper-locations: classpath*:mapper/*Mapper.xml

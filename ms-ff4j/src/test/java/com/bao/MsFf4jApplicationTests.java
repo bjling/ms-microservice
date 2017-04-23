@@ -11,6 +11,10 @@ public class MsFf4jApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		int NCPU = Runtime.getRuntime().availableProcessors();
+
+		System.out.println(NCPU);
+		System.out.println(Runtime.getRuntime().totalMemory()/(1024*1024));
 	}
 
 }
