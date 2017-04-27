@@ -47,12 +47,16 @@ public class TreeMapBao<K, V>
         return size;
     }
 
+    /**
+     * 按照键值的顺序从root开始，小左大右
+     */
     public boolean containsKey(Object key) {
         return getEntry(key) != null;
     }
 
     /**
-     * 按照键值的顺序从小到大遍历，与map的大小成线性关系
+     * 按照键值的顺序从小到大（即最左的节点）遍历，与map的大小成线性关系
+     * 一般为左右父
      */
     public boolean containsValue(Object value) {
         for (Entry<K, V> e = getFirstEntry(); e != null; e = successor(e))
@@ -62,26 +66,7 @@ public class TreeMapBao<K, V>
     }
 
     /**
-     * Returns the value to which the specified key is mapped,
-     * or {@code null} if this map contains no mapping for the key.
-     * <p>
-     * <p>More formally, if this map contains a mapping from a key
-     * {@code k} to a value {@code v} such that {@code key} compares
-     * equal to {@code k} according to the map's ordering, then this
-     * method returns {@code v}; otherwise it returns {@code null}.
-     * (There can be at most one such mapping.)
-     * <p>
-     * <p>A return value of {@code null} does not <em>necessarily</em>
-     * indicate that the map contains no mapping for the key; it's also
-     * possible that the map explicitly maps the key to {@code null}.
-     * The {@link #containsKey containsKey} operation may be used to
-     * distinguish these two cases.
-     *
-     * @throws ClassCastException   if the specified key cannot be compared
-     *                              with the keys currently in the map
-     * @throws NullPointerException if the specified key is null
-     *                              and this map uses natural ordering, or its comparator
-     *                              does not permit null keys
+     * 按照键值的顺序从root开始，小左大右
      */
     public V get(Object key) {
         Entry<K, V> p = getEntry(key);
@@ -92,16 +77,10 @@ public class TreeMapBao<K, V>
         return comparator;
     }
 
-    /**
-     * @throws java.util.NoSuchElementException {@inheritDoc}
-     */
     public K firstKey() {
         return key(getFirstEntry());
     }
 
-    /**
-     * @throws java.util.NoSuchElementException {@inheritDoc}
-     */
     public K lastKey() {
         return key(getLastEntry());
     }
@@ -136,18 +115,7 @@ public class TreeMapBao<K, V>
         super.putAll(map);
     }
 
-    /**
-     * Returns this map's entry for the given key, or {@code null} if the map
-     * does not contain an entry for the key.
-     *
-     * @return this map's entry for the given key, or {@code null} if the map
-     * does not contain an entry for the key
-     * @throws ClassCastException   if the specified key cannot be compared
-     *                              with the keys currently in the map
-     * @throws NullPointerException if the specified key is null
-     *                              and this map uses natural ordering, or its comparator
-     *                              does not permit null keys
-     */
+
     final Entry<K, V> getEntry(Object key) {
         // Offload comparator-based version for sake of performance
         if (comparator != null)
@@ -169,12 +137,6 @@ public class TreeMapBao<K, V>
         return null;
     }
 
-    /**
-     * Version of getEntry using comparator. Split off from getEntry
-     * for performance. (This is not worth doing for most methods,
-     * that are less dependent on comparator performance, but is
-     * worthwhile here.)
-     */
     final Entry<K, V> getEntryUsingComparator(Object key) {
         @SuppressWarnings("unchecked")
         K k = (K) key;
@@ -195,10 +157,7 @@ public class TreeMapBao<K, V>
     }
 
     /**
-     * Gets the entry corresponding to the specified key; if no such entry
-     * exists, returns the entry for the least key greater than the specified
-     * key; if no such entry exists (i.e., the greatest key in the Tree is less
-     * than the specified key), returns {@code null}.
+     * 大于或等于key的最接近值
      */
     final Entry<K, V> getCeilingEntry(K key) {
         Entry<K, V> p = root;
@@ -228,9 +187,7 @@ public class TreeMapBao<K, V>
     }
 
     /**
-     * Gets the entry corresponding to the specified key; if no such entry
-     * exists, returns the entry for the greatest key less than the specified
-     * key; if no such entry exists, returns {@code null}.
+     * 小于或等于key的最接近值
      */
     final Entry<K, V> getFloorEntry(K key) {
         Entry<K, V> p = root;
