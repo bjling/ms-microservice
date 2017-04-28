@@ -17,3 +17,5 @@ Trie树：又名单词查找树，一种树形结构，常用来操作字符串�
 [通过分析 JDK 源代码研究 TreeMap 红黑树算法实现](https://www.ibm.com/developerworks/cn/java/j-lo-tree/index.html?ca=drs-)
 
 [学习JavaScript数据结构与算法 — AVL树](https://segmentfault.com/a/1190000008619134)
+
+[AVL树的旋转操作 图解 最详细](http://blog.csdn.net/collonn/article/details/20128205)

@@ -217,12 +217,6 @@ public class TreeMapBao<K, V>
         return null;
     }
 
-    /**
-     * Gets the entry for the least key greater than the specified
-     * key; if no such entry exists, returns the entry for the least
-     * key greater than the specified key; if no such entry exists
-     * returns {@code null}.
-     */
     final Entry<K, V> getHigherEntry(K key) {
         Entry<K, V> p = root;
         while (p != null) {
@@ -249,11 +243,6 @@ public class TreeMapBao<K, V>
         return null;
     }
 
-    /**
-     * Returns the entry for the greatest key less than the specified key; if
-     * no such entry exists (i.e., the least key in the Tree is greater than
-     * the specified key), returns {@code null}.
-     */
     final Entry<K, V> getLowerEntry(K key) {
         Entry<K, V> p = root;
         while (p != null) {
@@ -281,21 +270,9 @@ public class TreeMapBao<K, V>
     }
 
     /**
-     * Associates the specified value with the specified key in this map.
-     * If the map previously contained a mapping for the key, the old
-     * value is replaced.
-     *
-     * @param key   key with which the specified value is to be associated
-     * @param value value to be associated with the specified key
-     * @return the previous value associated with {@code key}, or
-     * {@code null} if there was no mapping for {@code key}.
-     * (A {@code null} return can also indicate that the map
-     * previously associated {@code null} with {@code key}.)
-     * @throws ClassCastException   if the specified key cannot be compared
-     *                              with the keys currently in the map
-     * @throws NullPointerException if the specified key is null
-     *                              and this map uses natural ordering, or its comparator
-     *                              does not permit null keys
+     * put方法返回旧值
+     * 1、找到父节点，然后添加到左右子节点
+     * 2、重新fixAfterInsertion
      */
     public V put(K key, V value) {
         Entry<K, V> t = root;
@@ -349,20 +326,6 @@ public class TreeMapBao<K, V>
         return null;
     }
 
-    /**
-     * Removes the mapping for this key from this TreeMap if present.
-     *
-     * @param key key for which mapping should be removed
-     * @return the previous value associated with {@code key}, or
-     * {@code null} if there was no mapping for {@code key}.
-     * (A {@code null} return can also indicate that the map
-     * previously associated {@code null} with {@code key}.)
-     * @throws ClassCastException   if the specified key cannot be compared
-     *                              with the keys currently in the map
-     * @throws NullPointerException if the specified key is null
-     *                              and this map uses natural ordering, or its comparator
-     *                              does not permit null keys
-     */
     public V remove(Object key) {
         Entry<K, V> p = getEntry(key);
         if (p == null)
@@ -1019,19 +982,21 @@ public class TreeMapBao<K, V>
         }
     }
 
-    final class EntryIterator extends PrivateEntryIterator<Map.Entry<K,V>> {
-        EntryIterator(Entry<K,V> first) {
+    final class EntryIterator extends PrivateEntryIterator<Map.Entry<K, V>> {
+        EntryIterator(Entry<K, V> first) {
             super(first);
         }
-        public Map.Entry<K,V> next() {
+
+        public Map.Entry<K, V> next() {
             return nextEntry();
         }
     }
 
     final class ValueIterator extends PrivateEntryIterator<V> {
-        ValueIterator(Entry<K,V> first) {
+        ValueIterator(Entry<K, V> first) {
             super(first);
         }
+
         public V next() {
             return nextEntry().value;
         }
@@ -2134,11 +2099,11 @@ public class TreeMapBao<K, V>
      * From CLR
      */
     private void fixAfterInsertion(TreeMapBao.Entry<K, V> x) {
-        x.color = RED;
+        x.color = RED;  //1、设置为红色
 
-        while (x != null && x != root && x.parent.color == RED) {
-            if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
-                TreeMapBao.Entry<K, V> y = rightOf(parentOf(parentOf(x)));
+        while (x != null && x != root && x.parent.color == RED) { //2、如果x不为空 && x不为root && x的父节点颜色为红色
+            if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {  //3、如果x父节点 为 x祖父节点的 左节点
+                TreeMapBao.Entry<K, V> y = rightOf(parentOf(parentOf(x))); //3、y为 x祖父节点的 右节点
                 if (colorOf(y) == RED) {
                     setColor(parentOf(x), BLACK);
                     setColor(y, BLACK);
@@ -2155,7 +2120,7 @@ public class TreeMapBao<K, V>
                 }
             } else {
                 TreeMapBao.Entry<K, V> y = leftOf(parentOf(parentOf(x)));
-                if (colorOf(y) == RED) {
+                if (colorOf(y) == RED) { //y为null则返回BLACK
                     setColor(parentOf(x), BLACK);
                     setColor(y, BLACK);
                     setColor(parentOf(parentOf(x)), RED);
@@ -2410,10 +2375,10 @@ public class TreeMapBao<K, V>
      */
     @SuppressWarnings("unchecked")
     private final TreeMapBao.Entry<K, V> buildFromSorted(int level, int lo, int hi,
-                                                      int redLevel,
-                                                      Iterator<?> it,
-                                                      java.io.ObjectInputStream str,
-                                                      V defaultVal)
+                                                         int redLevel,
+                                                         Iterator<?> it,
+                                                         java.io.ObjectInputStream str,
+                                                         V defaultVal)
             throws java.io.IOException, ClassNotFoundException {
         /*
          * Strategy: The root is the middlemost element. To get to it, we
