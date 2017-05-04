@@ -39,6 +39,8 @@ http://ifeve.com/netty5-user-guide/
 
 [TCP handshake](docs/TCPhandshake.md)
 
+[Redis菜鸟教程](http://www.runoob.com/redis/redis-sorted-sets.html)
+
 #### Blog
 
 [占小狼](http://www.jianshu.com/u/90ab66c248e6)
