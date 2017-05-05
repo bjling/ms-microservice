@@ -29,6 +29,11 @@ public class TestService {
     @Autowired
     WorldClient worldClient;
 
+    public void notretry() {
+        // ... do something
+        service();
+    }
+
     @Retryable(value = RemoteAccessException.class, backoff = @Backoff(delay = 100, maxDelay = 500))
     public void service() {
         // ... do something

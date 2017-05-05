@@ -57,6 +57,13 @@ public class MsNettyApplication {
 		return "world";
 	}
 
+	@GetMapping("/test")
+//    @HystrixCommand
+	public String test() {
+		testService.service1();
+		return "test";
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(MsNettyApplication.class, args);
 	}

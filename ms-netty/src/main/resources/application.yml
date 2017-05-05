@@ -2,7 +2,6 @@ server:
   port: 9005
 
 
-
 eureka:
   instance:
     prefer-ip-address: true
@@ -12,13 +11,13 @@ eureka:
 #    enabled: false
 
 spring:
-  zipkin:
-    enabled: false
   application:
     name: ms-netty
   boot:
     admin:
       context-path: /admin/manange
+  zipkin:
+    base-url: http://localhost:9411
 
 #feign:
 #  hystrix:
@@ -32,3 +31,7 @@ hystrix:
 #          strategy: SEMAPHORE
           thread:
             timeoutInMilliseconds: 20000
+security:
+  user:
+    name: user
+    password: user
