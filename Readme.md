@@ -11,6 +11,7 @@
 #### 10、sharding-jdbc
 #### 11、RocketMQ
 #### 12、ff4j --灰度，蓝绿等
+#### 13、ElasticSearch
 
 ## ms-hello
 #### exception handle
@@ -40,6 +41,8 @@ http://ifeve.com/netty5-user-guide/
 [TCP handshake](docs/TCPhandshake.md)
 
 [Redis菜鸟教程](http://www.runoob.com/redis/redis-sorted-sets.html)
+
+[Elasticsearch: 权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/foreword_id.html)
 
 #### Blog
 
