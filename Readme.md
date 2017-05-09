@@ -27,10 +27,11 @@ http://blog.csdn.net/applebomb/article/details/52400154
 http://ifeve.com/google-guava/
 #### Email
 http://blog.csdn.net/sdmxdzb/article/details/40737931
-#### netty
+
+## netty
 http://ifeve.com/netty5-user-guide/
 
-#### Learn More
+## Learn More
 
 [Tree](docs/TREE.MD)
 
@@ -44,10 +45,14 @@ http://ifeve.com/netty5-user-guide/
 
 [Elasticsearch: 权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/foreword_id.html)
 
-#### Blog
+[elasticsearch-jdbc实现MySQL同步到ElasticSearch深入详解](http://blog.csdn.net/laoyang360/article/details/51694519)
+
+[elasticsearch-jdbc实现MySQL同步到ElasticSearch深入详解](http://blog.csdn.net/laoyang360/article/details/51694519)
+
+## Blog
 
 [占小狼](http://www.jianshu.com/u/90ab66c248e6)
 
-#### Specification
+## Specification
 
 [规范](docs/specification.md)
