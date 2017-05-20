@@ -1,13 +1,13 @@
 package com.bao.controller;
 
+import com.bao.config.UserStatus;
+import com.bao.model.UserDto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -16,7 +16,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 @Slf4j
 @RestController
-@Api(value = "test",tags = "test")
+@Api(value = "test", tags = "test")
 public class TestController {
     @GetMapping("/world")
 //    @HystrixCommand
@@ -48,5 +48,11 @@ public class TestController {
             e.printStackTrace();
         }
         return "world";
+    }
+
+    @PostMapping("/enum")
+    public String enumTest(@RequestBody UserDto userDto) {
+        System.out.println(userDto.getUserType().name());
+        return userDto.getName();
     }
 }

@@ -1,5 +1,6 @@
 package com.bao;
 
+import com.bao.controller.TestController;
 import com.bao.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,13 @@ public class MsWorldApplicationTests {
         //testService.test();
         //yes transaction
         testService.test2();
+    }
+
+    @Autowired
+    TestController testController;
+
+    @Test
+    public void enumTest(){
     }
 
 }
