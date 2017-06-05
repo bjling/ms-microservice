@@ -6,6 +6,8 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+
+
 /**
  * Created by baochunyu on 2017/2/18.
  */

@@ -2,3 +2,20 @@ multi:
   datasource:
     - test1
     - test2
+
+test1:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sharding-01
+    username: root
+    password: 123456
+test2:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sharding-02
+    username: root
+    password: 123456
+
+mybatis:
+  type-aliases-package: com.bao.msdatasources.model
+  mapper-locations: classpath*:mapper/*Mapper.xml
