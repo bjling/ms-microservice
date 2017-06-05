@@ -36,6 +36,7 @@
         <module>ms-spring-batch</module>
         <module>ms-netty</module>
         <module>ms-ff4j</module>
+        <module>ms-datasources</module>
     </modules>
 
     <dependencies>

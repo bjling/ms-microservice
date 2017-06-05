@@ -1,0 +1,4 @@
+multi:
+  datasource:
+    - test1
+    - test2
