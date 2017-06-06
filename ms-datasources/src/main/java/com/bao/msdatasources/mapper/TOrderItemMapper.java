@@ -4,7 +4,7 @@ import com.bao.msdatasources.config.DataBaseSelector;
 import com.bao.msdatasources.model.TOrderItem;
 import org.apache.ibatis.annotations.Mapper;
 
-@DataBaseSelector(name = "test1")
+@DataBaseSelector(name = "test2")
 @Mapper
 public interface TOrderItemMapper {
     /**

@@ -8,13 +8,13 @@ test1:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sharding-01
     username: root
-    password: 123456
+    password: root123~
 test2:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sharding-02
     username: root
-    password: 123456
+    password: root123~
 
 mybatis:
   type-aliases-package: com.bao.msdatasources.model

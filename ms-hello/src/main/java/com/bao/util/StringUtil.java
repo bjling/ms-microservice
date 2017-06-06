@@ -131,15 +131,16 @@ public class StringUtil {
 //        System.out.println(Math.floor(512/60));
 //        System.out.println(DoubleMath.roundToLong(512/60, RoundingMode.FLOOR));
 
-        Date date1 = new Date(1496246400000L);
+        Date date1 = covertLocalDate(LocalDate.now());
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd hh:mm:ss");
         System.out.println(format.format(date1));
+        System.out.println(date1.getDate() +"  "+date1.getDay());
 
-        LocalDate localDate = LocalDate.now();
-        Date date = covertLocalDate(localDate);
+        LocalDate localDate = covertDate(date1);
 //        date = format.parse("20170602 00:00:00");
 
-        System.out.println(date.getTime());
+        System.out.println(localDate.toString());
+        System.out.println(localDate.getDayOfMonth());
 
 
 
@@ -177,8 +178,12 @@ public class StringUtil {
 
     }
 
-    public static Date covertLocalDate(LocalDate localDate) {
-        return new Date(localDate.getYear() - 1900, localDate.getMonthValue() - 1, localDate.getDayOfMonth());
+    public static Date covertLocalDate(LocalDate localDate){
+        return new Date(localDate.getYear()-1900, localDate.getMonthValue()-1, localDate.getDayOfMonth());
+    }
+
+    public static LocalDate covertDate(Date date){
+        return LocalDate.of(date.getYear()+1900,date.getMonth()+1,date.getDate());
     }
 
     public static double timeToDouble(LocalDateTime time) {

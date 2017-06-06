@@ -1,6 +1,9 @@
 package com.bao.msdatasources.config;
 
+import com.bao.msdatasources.service.TestService;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -27,17 +30,34 @@ public class DataBaseAspect {
     /**
      * 定义一个公共的切点
      */
-    @Pointcut("@annotation(com.bao.msdatasources.config.DataBaseSelector)")
-    public void select() {
-    }
+//    @Pointcut("@annotation(com.bao.msdatasources.config.DataBaseSelector)")
+//    public void select() {
+//    }
+//
+//    /**
+//     * 目标方法执行之前调用
+//     * ProceedingJoinPoint is only supported for around advice
+//     */
+//    @Before("select()")
+//    public void setThreadLocal(JoinPoint jp) {
+//        DataBaseSelector selector = (DataBaseSelector) jp.getSignature().getDeclaringType().getAnnotation(DataBaseSelector.class);
+//        System.out.println(selector);
+//        DatabaseContextHolder.setDatabaseType(selector.name());
+//    }
 
     /**
-     * 目标方法执行之前调用
-     * ProceedingJoinPoint is only supported for around advice
+     * 使用空方法定义切点表达式
      */
-    @Before("select()")
-    public void setThreadLocal(JoinPoint jp) {
-        DataBaseSelector selector = (DataBaseSelector) jp.getSignature().getDeclaringType().getAnnotation(DataBaseSelector.class);
+    @Pointcut("execution(* com.bao.msdatasources.mapper.*.*(..))")
+    public void declareJointPointExpression() {
+    }
+
+    @Before("declareJointPointExpression()")
+    public void setDataSourceKey(JoinPoint point){
+        //根据连接点所属的类实例，动态切换数据源
+
+        DataBaseSelector selector = (DataBaseSelector) point.getSignature().getDeclaringType().getAnnotation(DataBaseSelector.class);
+        System.out.println(selector);
         DatabaseContextHolder.setDatabaseType(selector.name());
     }
 
