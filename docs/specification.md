@@ -26,7 +26,12 @@ Maven项目结构生成网站[start.spring](http://start.spring.io/)
     ---------------------.BusinessException
     ---------------------.GlobalExceptionHandler
     
-参考Demo：[微服务实践](https://github.com/wangfeishsh/ms-microservice.git)
+参考Demo：[微服务实践](https://github.com/wangfeishsh/ms-ypp.git)
+1. ms-eureka 服务注册中心
+2. ms-config 配置服务中心
+3. ms-trade  交易服务demo
+4. ms-user   用户服务demo
+5. [配置文件仓库](https://github.com/wangfeishsh/ypp-config.git)
 
 
 ## Spring Cloud 使用规范
@@ -44,6 +49,25 @@ Maven项目结构生成网站[start.spring](http://start.spring.io/)
 #### config
 
 鉴于微服务开发过程中各个环境的不同，使用git作为配置文件中心化管理工具
+
+1. 服务端
+
+Annotation：
+~~~
+    @EnableConfigServer
+    @SpringBootApplication
+    public class MsConfigApplication
+~~~
+
+application.properties配置：
+~~~
+    spring.cloud.config.server.git.force-pull=true
+    spring.cloud.config.server.git.uri=https://github.com/wangfeishsh/ypp-config.git
+    spring.cloud.config.server.git.name=**
+    spring.cloud.config.server.git.password=**
+~~~
+
+2. 客户端
 
 ~~~
     <dependency>

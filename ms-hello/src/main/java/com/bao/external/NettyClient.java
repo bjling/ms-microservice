@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by baochunyu on 2017/3/22.
  */
 
-@FeignClient(name = "ms-netty")
+@FeignClient(name = "ms-netty",url = "http://baidu.com")
 public interface NettyClient {
 
     @RequestMapping(value = "/netty", method = RequestMethod.GET)

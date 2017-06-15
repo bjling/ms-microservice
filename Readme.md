@@ -57,3 +57,8 @@ http://ifeve.com/netty5-user-guide/
 ## Specification
 
 [规范](docs/specification.md)
+
+
+#### Elastic IP
+#### Amazon Route 53
+云域名系统 (DNS) Web 服务
