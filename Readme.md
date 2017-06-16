@@ -62,3 +62,8 @@ http://ifeve.com/netty5-user-guide/
 #### Elastic IP
 #### Amazon Route 53
 云域名系统 (DNS) Web 服务
+
+[微服务&Netflix 源码笔记](http://www.idouba.net/sping-cloud-and-netflix/)
+
+[spring boot 启动](http://www.cnblogs.com/xinzhao/p/5551828.html)
+1. ClassLoader
