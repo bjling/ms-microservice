@@ -181,7 +181,14 @@ isAssignableFrom 是用来判断一个类Class1和另一个类Class2是否相同
 
 
 #### SpringApplication类的静态run方法
-new SpringApplication(sources).run(args)
+
+启动计时器，新建ConfigurableApplicationContext上下文，失败分析器，并且配置headless模式
+
+[Headless 模式](http://www.oschina.net/translate/using-headless-mode-in-java-se)
+
+[Headless 模式 官网](http://www.oracle.com/technetwork/articles/javase/headless-136834.html)
+
+获取所有SpringApplicationRunListener子类，实际上只有EventPublishingRunListener
 
 ~~~
 	public ConfigurableApplicationContext run(String... args) {
@@ -218,3 +225,146 @@ new SpringApplication(sources).run(args)
 		}
 	}
 ~~~
+EventPublishingRunListener的构造函数为SpringApplication与args，所以获取了SpringApplication中所有的listener，
+每个listener对ApplicationStartedEvent事件进行响应
+~~~
+	private SpringApplicationRunListeners getRunListeners(String[] args) {
+		Class<?>[] types = new Class<?>[] { SpringApplication.class, String[].class };
+		return new SpringApplicationRunListeners(logger, getSpringFactoriesInstances(
+				SpringApplicationRunListener.class, types, this, args));
+	}
+~~~
+
+~~~
+	public EventPublishingRunListener(SpringApplication application, String[] args) {
+		this.application = application;
+		this.args = args;
+		this.initialMulticaster = new SimpleApplicationEventMulticaster();
+		for (ApplicationListener<?> listener : application.getListeners()) {
+			this.initialMulticaster.addApplicationListener(listener);
+		}
+	}
+	
+		@Override
+    	@SuppressWarnings("deprecation")
+    	public void starting() {
+    		this.initialMulticaster
+    				.multicastEvent(new ApplicationStartedEvent(this.application, this.args));
+    	}
+~~~
+
+构造输入参数对象，并且准备环境信息，每个listener对ApplicationEnvironmentPreparedEvent事件进行响应
+
+~~~
+    ApplicationArguments applicationArguments = new DefaultApplicationArguments(
+					args);
+			ConfigurableEnvironment environment = prepareEnvironment(listeners,
+					applicationArguments);
+
+	private ConfigurableEnvironment prepareEnvironment(
+			SpringApplicationRunListeners listeners,
+			ApplicationArguments applicationArguments) {
+		// Create and configure the environment
+		ConfigurableEnvironment environment = getOrCreateEnvironment();
+		configureEnvironment(environment, applicationArguments.getSourceArgs());
+		listeners.environmentPrepared(environment);
+		if (!this.webEnvironment) {
+			environment = new EnvironmentConverter(getClassLoader())
+					.convertToStandardEnvironmentIfNecessary(environment);
+		}
+		return environment;
+	}
+~~~
+
+准备好打印标语对象
+~~~
+Banner printedBanner = printBanner(environment);
+
+class SpringBootBanner implements Banner {
+
+	private static final String[] BANNER = { "",
+			"  .   ____          _            __ _ _",
+			" /\\\\ / ___'_ __ _ _(_)_ __  __ _ \\ \\ \\ \\",
+			"( ( )\\___ | '_ | '_| | '_ \\/ _` | \\ \\ \\ \\",
+			" \\\\/  ___)| |_)| | | | | || (_| |  ) ) ) )",
+			"  '  |____| .__|_| |_|_| |_\\__, | / / / /",
+			" =========|_|==============|___/=/_/_/_/" };
+
+	private static final String SPRING_BOOT = " :: Spring Boot :: ";
+
+	private static final int STRAP_LINE_SIZE = 42;
+
+~~~
+
+创建上下文信息
+~~~
+	protected ConfigurableApplicationContext createApplicationContext() {
+		Class<?> contextClass = this.applicationContextClass;
+		if (contextClass == null) {
+			try {
+				contextClass = Class.forName(this.webEnvironment
+						? DEFAULT_WEB_CONTEXT_CLASS : DEFAULT_CONTEXT_CLASS);
+			}
+			catch (ClassNotFoundException ex) {
+				throw new IllegalStateException(
+						"Unable create a default ApplicationContext, "
+								+ "please specify an ApplicationContextClass",
+						ex);
+			}
+		}
+		return (ConfigurableApplicationContext) BeanUtils.instantiate(contextClass);
+	}
+	
+		public static final String DEFAULT_WEB_CONTEXT_CLASS = "org.springframework."
+    			+ "boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext";
+    
+    	private static final String[] WEB_ENVIRONMENT_CLASSES = { "javax.servlet.Servlet",
+    			"org.springframework.web.context.ConfigurableWebApplicationContext" };
+	
+~~~
+新建对象FailureAnalyzers并且准备上下文信息
+
+1. 设置环境变量
+2. beanNameGenerator与resourceLoader都为空，所以这一步跳过
+3. 每个ApplicationContextInitializer子类都对上下文做初始化操作
+4. listeners做上下文准备工作，这一步什么都没做
+5. 启动日志记录，使用main方法类记录
+6. 注册特殊的单例类springApplicationArguments
+7. 注册特殊的单例类springBootBanner
+8. 获取资源配置类，并且进行加载
+
+![source](images/source.png "Optional title")
+
+~~~
+	private void prepareContext(ConfigurableApplicationContext context,
+			ConfigurableEnvironment environment, SpringApplicationRunListeners listeners,
+			ApplicationArguments applicationArguments, Banner printedBanner) {
+		context.setEnvironment(environment);
+		postProcessApplicationContext(context);
+		applyInitializers(context);
+		listeners.contextPrepared(context);
+		if (this.logStartupInfo) {
+			logStartupInfo(context.getParent() == null);
+			logStartupProfileInfo(context);
+		}
+
+		// Add boot specific singleton beans
+		context.getBeanFactory().registerSingleton("springApplicationArguments",
+				applicationArguments);
+		if (printedBanner != null) {
+			context.getBeanFactory().registerSingleton("springBootBanner", printedBanner);
+		}
+
+		// Load the sources
+		Set<Object> sources = getSources();
+		Assert.notEmpty(sources, "Sources must not be empty");
+		load(context, sources.toArray(new Object[sources.size()]));
+		listeners.contextLoaded(context);
+	}
+~~~
+
+~~~
+2017-06-16 18:43:28.162  INFO [ypp-content-api,,,] 6244 --- [           main] c.y.content.YppContentApiApplication     : The following profiles are active: local
+~~~
+
+[Reference](http://www.cnblogs.com/xinzhao/p/5551828.html)
