@@ -1,5 +1,6 @@
 ## feature
 #### 1、eureka注册中心
+1.5.4-RELEASE DS Replicas must use yml or else properties can't show right
 #### 2、oauth2安全认证中心
 #### 3、sleuth链路跟踪
 #### 4、logstash日志收集

@@ -335,6 +335,8 @@ class SpringBootBanner implements Banner {
 
 ![source](images/source.png "Optional title")
 
+9. listeners加载上下文事件处理
+
 ~~~
 	private void prepareContext(ConfigurableApplicationContext context,
 			ConfigurableEnvironment environment, SpringApplicationRunListeners listeners,
@@ -365,6 +367,22 @@ class SpringBootBanner implements Banner {
 
 ~~~
 2017-06-16 18:43:28.162  INFO [ypp-content-api,,,] 6244 --- [           main] c.y.content.YppContentApiApplication     : The following profiles are active: local
+~~~
+
+执行ApplicationRunner和CommandLineRunner任务
+~~~
+	protected void afterRefresh(ConfigurableApplicationContext context,
+			ApplicationArguments args) {
+		callRunners(context, args);
+	}
+~~~
+
+最后listeners执行结束事件
+
+如果过程有异常
+~~~
+handleRunFailure(context, listeners, analyzers, ex);
+			throw new IllegalStateException(ex);
 ~~~
 
 [Reference](http://www.cnblogs.com/xinzhao/p/5551828.html)
