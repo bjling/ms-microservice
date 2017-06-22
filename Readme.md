@@ -15,7 +15,20 @@
 #### 13、ElasticSearch
 #### 14、Multi-DataSource
 #### 15、config文件配置中心
-1.5.4-RELEASE 新添加和修改的文件都可以及时curl出来
+    1.5.4-RELEASE 新添加和修改的文件都可以及时curl出来
+    项目启动时，如果不指定目录，则在临时文件目录下创建一个目录(每次重启会创建不同的目录)，例如windowsC:\Users\TEST\AppData\Local\Temp下创建
+    config-repo-740712308206953
+    首次curl的时候会clone所有的配置文件到此临时目录
+
+![config](docs/images/config.png)
+
+    每次执行curl时，均会执行git命令获取最新配置（对比修改日期）
+
+![config1](docs/images/config1.png)
+
+[JGit official](http://wiki.eclipse.org/JGit/User_Guide)
+
+[JGit](http://www.importnew.com/19970.html?utm_source=tuicool&utm_medium=referral)
 
 ## ms-hello
 #### exception handle
