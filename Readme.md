@@ -14,6 +14,8 @@
 #### 12、ff4j --灰度，蓝绿等
 #### 13、ElasticSearch
 #### 14、Multi-DataSource
+#### 15、config文件配置中心
+1.5.4-RELEASE 新添加和修改的文件都可以及时curl出来
 
 ## ms-hello
 #### exception handle
