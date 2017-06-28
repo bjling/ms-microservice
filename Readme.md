@@ -4,6 +4,50 @@
 #### 2、oauth2安全认证中心
 #### 3、sleuth链路跟踪
 #### 4、logstash日志收集
+
+filebeat or logstash self
+
+    input {
+         beats {
+              port => 5044
+              codec => "json"
+         }
+    }
+    
+    input { 
+    	stdin { } 
+    	file {
+    	    path => "/Users/baochunyu/Downloads/logs/ms-hello.json"
+          codec => json {
+            charset => "UTF-8"
+          }
+    	    # start_position => "beginning"
+      	}
+      	file {
+    	    path => "/Users/baochunyu/Downloads/logs/ms-world.json"
+          codec => json {
+            charset => "UTF-8"
+          }
+    	    # start_position => "beginning"
+      	}
+    }
+    
+    filter {
+           # pattern matching logback pattern
+          grok {
+                  match => { "message" => "%{TIMESTAMP_ISO8601:timestamp}\s+%{LOGLEVEL:severity}\s+\[%{DATA:service},%{DATA:trace},%{DATA:span},%{DATA:exportable}\]\s+%{DATA:pid}---\s+\[%{DATA:thread}\]\s+%{DATA:class}\s+:\s+%{GREEDYDATA:rest}\s+%{GREEDYDATA:exception}" }
+           }
+    }
+    
+    output {
+      elasticsearch { 
+        hosts => ["localhost:9200"] 
+        index => "ms-microservice"
+      }
+      stdout { codec => rubydebug }
+    }
+
+
 #### 5、全局异常处理
 #### 6、资源服务认证
 #### 7、RabbitMQ --未添加
@@ -82,4 +126,9 @@ http://ifeve.com/netty5-user-guide/
 [微服务&Netflix 源码笔记](http://www.idouba.net/sping-cloud-and-netflix/)
 
 [spring boot 启动](http://www.cnblogs.com/xinzhao/p/5551828.html)
+
+[spring boot应用启动原理分析 ](http://blog.csdn.net/hengyunabc/article/details/50120001)
+
 1. ClassLoader
+
+[一看你就懂，超详细java中的ClassLoader详解](http://blog.csdn.net/briblue/article/details/54973413)
