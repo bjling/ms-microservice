@@ -29,3 +29,9 @@ Luckily it’s very easy to define, run, and scale services with the Docker plat
 Services就是是“生产环境的容器。”服务只运行一个图像，但它所编码的图像运行它应该使用什么端口的，有多少复制品的容器应运行服务所需要的能力，等等。拓展服务会改变运行该软件的容器实例的数量，将更多的计算资源分配给运行中的服务。
 
 幸运的是，它很容易通过Docker平台去定义、运行，拓展 services -- 只需写一个docker-compose.yml文件。
+
+###### swarm
+
+A swarm is a group of machines that are running Docker and joined into a cluster. After that has happened, you continue to run the Docker commands you’re used to, but now they are executed on a cluster by a swarm manager. The machines in a swarm can be physical or virtual. After joining a swarm, they are referred to as nodes.
+
+一个swarm是一组正在运行Docker的机器加入到一个集群。之后的事情，你继续你习惯的Docker的命令，但现在他们在及群众通过swarm manager执行。集群中的机器可以是物理的，也可以是虚拟的。加入群后，它们被称为节点。
