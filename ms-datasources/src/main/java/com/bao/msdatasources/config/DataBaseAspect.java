@@ -52,6 +52,12 @@ public class DataBaseAspect {
     public void declareJointPointExpression() {
     }
 
+
+    @Pointcut("execution(* com.bao.msdatasources.mapper.*.select*(..))")
+    public void slaveExpression() {
+    }
+
+
     @Before("declareJointPointExpression()")
     public void setDataSourceKey(JoinPoint point){
         //根据连接点所属的类实例，动态切换数据源
@@ -59,6 +65,12 @@ public class DataBaseAspect {
         DataBaseSelector selector = (DataBaseSelector) point.getSignature().getDeclaringType().getAnnotation(DataBaseSelector.class);
         System.out.println(selector);
         DatabaseContextHolder.setDatabaseType(selector.name());
+    }
+
+    @Before("slaveExpression()")
+    public void setSlaveDataSourceKey(){
+        //根据连接点所属的类实例，动态切换数据源
+        DatabaseContextHolder.setDatabaseType(DataType.test1.name());
     }
 
 }
