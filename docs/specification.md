@@ -153,7 +153,22 @@ public interface NettyClient {
 
 ## Redis使用规范
 
+1. key不要太长，太长导致消耗内存还会降低查询效率，也不要太短，太短会降低key的可读性
 
+2. 使用时在项目readme中需要标志数据类型以及作用
+
+ * strings
+ * lists
+ * sets
+ * sorted sets
+ * hashes
+
+3. 命名规范，名字具有一定的描述性，例如用户缓存YPP:USER:{TOKEN},使用冒号做分割
+
+4. 现阶段可评估是否与php的redis集群分开，单独建立自己项目的缓存
+
+5. 缓存中基础数据最好从基础系统中获取，否则会导致数据不一致，另外一些可变的配置无需写入缓存，例如图片的域名地址
+ 
 
 ## 日志规范
 
@@ -196,3 +211,13 @@ public interface NettyClient {
 
 
 ## MQ使用规范
+
+## Mybatis使用规范
+
+1. 读写分离，mybatis方法名称的规范，增删改查使用的关键字如下，其中select从从库中读取，find从主库读取
+
+* select
+* update
+* insert
+* delete
+* find
