@@ -15,7 +15,7 @@ public class DateUtils {
     }
 
     public static LocalDate covertDate(Date date) {
-        return LocalDate.of(date.getYear() + 1900, date.getMonth() + 1, date.getDay());
+        return LocalDate.of(date.getYear() + 1900, date.getMonth() + 1, date.getDate());
     }
 
     public static double timeToDouble(LocalDateTime time) {

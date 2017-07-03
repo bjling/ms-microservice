@@ -37,3 +37,24 @@ The unit of scale being an individual, portable executable has vast implications
 规模的单位是独立的，便携式可执行文件具有巨大的影响。这意味着CI / CD可以将更新推送到分布式应用程序的任何部分，系统依赖性不是问题，而且资源密度也增加了。规模行为表现的编排是一个新的可执行文件的转动，没有新的VM主机。
 
 ## Get Started, Part 2: Containers
+
+~~~
+    docker build -t friendlyname .  # Create image using this directory's Dockerfile
+    docker run -p 4000:80 friendlyname  # Run "friendlyname" mapping port 4000 to 80
+    docker run -d -p 4000:80 friendlyname         # Same thing, but in detached mode
+    docker ps                                 # See a list of all running containers
+    docker stop <hash>                     # Gracefully stop the specified container
+    docker ps -a           # See a list of all containers, even the ones not running
+    docker kill <hash>                   # Force shutdown of the specified container
+    docker rm <hash>              # Remove the specified container from this machine
+    docker rm $(docker ps -a -q)           # Remove all containers from this machine
+    docker images -a                               # Show all images on this machine
+    docker rmi <imagename>            # Remove the specified image from this machine
+    docker rmi $(docker images -q)             # Remove all images from this machine
+    docker login             # Log in this CLI session using your Docker credentials
+    docker tag <image> username/repository:tag  # Tag <image> for upload to registry
+    docker push username/repository:tag            # Upload tagged image to registry
+    docker run username/repository:tag                   # Run image from a registry
+~~~
+
+## Get Started, Part 3: Services
