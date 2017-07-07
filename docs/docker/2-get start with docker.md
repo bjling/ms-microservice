@@ -58,3 +58,40 @@ The unit of scale being an individual, portable executable has vast implications
 ~~~
 
 ## Get Started, Part 3: Services
+
+~~~
+    docker stack ls              # List all running applications on this Docker host
+    docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
+    docker stack services <appname>       # List the services associated with an app
+    docker stack ps <appname>   # List the running containers associated with an app
+    docker stack rm <appname>                             # Tear down an application
+~~~
+
+## Get Started, Part 4: Swarms
+
+A swarm is a group of machines that are running Docker and joined into a cluster. After that has happened, you continue to run the Docker commands you’re used to, but now they are executed on a cluster by a swarm manager. The machines in a swarm can be physical or virtual. After joining a swarm, they are referred to as nodes.
+
+一个swarm是一组正在运行Docker的机器加入到一个集群。之后的事情发生了，你继续你习惯的Docker的命令，但在集群中他们通过swam manager去执行命令。集群中的机器可以是物理的，也可以是虚拟的。加入集群后，它们被称为节点。
+
+~~~
+    docker-machine create --driver virtualbox myvm1 # Create a VM (Mac, Win7, Linux)
+    docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1 # Win10
+    docker-machine env myvm1                # View basic information about your node
+    docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
+    docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
+    docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
+    docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
+    docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
+    docker-machine ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
+    docker-machine start myvm1            # Start a VM that is currently not running
+    docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
+    docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
+    docker-machine scp docker-compose.yml myvm1:~     # Copy file to node's home dir
+    docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app
+~~~
+
+## Get Started, Part 5: Stacks
+
+Here in part 5, you’ll reach the top of the hierarchy of distributed applications: the stack. A stack is a group of interrelated services that share dependencies, and can be orchestrated and scaled together. A single stack is capable of defining and coordinating the functionality of an entire application (though very complex applications may want to use multiple stacks).
+
+在第5部分中，您将达到分布式应用程序层次结构的顶层：堆栈。堆栈是一组共享依赖关系的相互关联的服务，可以一起被编排和缩放。单个堆栈能够定义和协调整个应用程序的功能（尽管非常复杂的应用程序可能希望使用多个堆栈）。

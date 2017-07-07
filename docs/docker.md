@@ -31,3 +31,9 @@
     curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://a8c1ed21.m.daocloud.io
 ~~~
 
+
+3. official
+
+[official](https://docs.docker.com/registry/recipes/mirror/#use-case-the-china-registry-mirror)
+
+
