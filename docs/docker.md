@@ -37,3 +37,19 @@
 [official](https://docs.docker.com/registry/recipes/mirror/#use-case-the-china-registry-mirror)
 
 
+#### QUESTION
+
+1. application 一般是通过挂卷的方式运行 or 通过images方式运行
+
+2. registry 应用的数量，以及storage driver使用问题
+
+3. Harbor 是单机还是集群
+
+#### HARBOR
+
+1. Docker-compose [Install](https://github.com/docker/compose/releases)
+~~~
+curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+~~~
+
+2. Harbor [Install](https://github.com/vmware/harbor/blob/master/docs/installation_guide.md)
