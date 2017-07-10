@@ -53,3 +53,49 @@ curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compos
 ~~~
 
 2. Harbor [Install](https://github.com/vmware/harbor/blob/master/docs/installation_guide.md)
+
+* Problem 1 
+
+[--insecure-registry](http://www.cnblogs.com/jackluo/p/5582329.html)
+~~~
+root@iZbp139ic9ytcyoavmelx2Z:/data/docker/registry/harbor# cat /lib/systemd/system/docker.service 
+[Unit]
+Description=Docker Application Container Engine
+Documentation=https://docs.docker.com
+After=network-online.target docker.socket firewalld.service
+Wants=network-online.target
+Requires=docker.socket
+
+[Service]
+Type=notify
+# the default is not to use systemd for cgroups because the delegate issues still
+# exists and systemd currently does not support the cgroup feature set required
+# for containers run by docker
+EnvironmentFile=/etc/default/docker
+ExecStart=/usr/bin/dockerd -H fd:// --insecure-registry=10.168.9.114
+ExecReload=/bin/kill -s HUP $MAINPID
+LimitNOFILE=1048576
+# Having non-zero Limit*s causes performance problems due to accounting overhead
+# in the kernel. We recommend using cgroups to do container-local accounting.
+LimitNPROC=infinity
+LimitCORE=infinity
+# Uncomment TasksMax if your systemd version supports it.
+# Only systemd 226 and above support this version.
+TasksMax=infinity
+TimeoutStartSec=0
+# set delegate yes so that systemd does not reset the cgroups of docker containers
+Delegate=yes
+# kill only the docker process, not all processes in the cgroup
+KillMode=process
+# restart the docker process if it exits prematurely
+Restart=on-failure
+StartLimitBurst=3
+StartLimitInterval=60s
+
+[Install]
+WantedBy=multi-user.target
+
+~~~
+[systemd](https://docs.docker.com/engine/admin/systemd/#httphttps-proxy)
+
+3. [Ubuntu iptables](http://www.cnblogs.com/general0878/p/5757377.html)
