@@ -118,3 +118,45 @@ ssh $IP "docker stop ${CONTAINER}"
 ssh $IP "docker run -idt --name=${PROJECT}_${VERSION} -p 8080:8080 registry.cmh.cn/test:${VERSION}"
 
 ~~~
+
+> Notice:jenkins执行docker命令时需要将jenkins用户加入docker组中
+
+1. centos docker 用户组
+
+* 新建用户组docker，如果用户组已经存在则跳过
+~~~
+$sudo cat /etc/group | docker
+$sudo groupadd -g 999 docker  
+#-g 999 为组ID，也可以不指定
+~~~
+* 为用户组docker增加用户
+~~~
+￥sudo gpasswd -a ${USER} docker
+~~~
+* 重启docker-daemon
+~~~
+$sudo systemctl restart docker
+~~~
+* 执行docker命令，如果提示get ...... dial unix /var/run/docker.sock权限不够，则修改/var/run/docker.sock权限
+~~~
+$sudo chmod a+rw /var/run/docker.sock
+~~~
+
+2. Ubuntu16.04添加Docker用户组
+~~~
+如果还没有 docker group 就添加一个：
+sudo groupadd docker
+
+将用户加入该 group 内。然后退出并重新登录就生效啦。
+sudo gpasswd -a ${USER} docker
+
+重启 docker 服务
+sudo service docker restart
+
+切换当前会话到新 group 或者重启 X 会话
+newgrp - docker
+OR
+pkill X
+
+注意，最后一步是必须的，否则因为 groups 命令获取到的是缓存的组信息，刚添加的组信息未能生效，所以 docker images 执行时同样有错。
+~~~
