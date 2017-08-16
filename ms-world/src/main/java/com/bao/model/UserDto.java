@@ -17,4 +17,5 @@ import lombok.NoArgsConstructor;
 public class UserDto {
     private String name;
     private UserType userType;
+    private UserStatus userStatus;
 }

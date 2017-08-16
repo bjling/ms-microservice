@@ -49,7 +49,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth").access("#oauth2.hasScope('read')")
-//                .antMatchers("/photos").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
+//                .antMatchers("/test").access("hasRole('USER')") //deny
+//                .antMatchers("/test").access("hasRole('ROLE_USER')") //deny
+//                .antMatchers("/test").access("#oauth2.clientHasRole('ROLE_CLIENT')") //deny
+//                .antMatchers("/test").access("hasRole('USER') or #oauth2.clientHasRole('ROLE_CLIENT')")
 //                .antMatchers("/photos/trusted/**").access("#oauth2.hasScope('trust')")
 //                .antMatchers("/photos/user/**").access("#oauth2.hasScope('trust')")
 //                .antMatchers("/photos/**").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")

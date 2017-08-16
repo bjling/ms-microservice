@@ -2,6 +2,11 @@
 #### 1、eureka注册中心
 1.5.4-RELEASE DS Replicas must use yml or else properties can't show right
 #### 2、oauth2安全认证中心
+
+    {exp=1502919015, user_name=marissa, authorities=[write], client_id=user, scope=[write, read]}
+
+可以看出来在check_token时返回的数据中，仅有的信息，user的authorities与client的
+
 #### 3、sleuth链路跟踪
 #### 4、logstash日志收集
 

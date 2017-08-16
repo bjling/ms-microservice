@@ -30,7 +30,7 @@ import java.util.concurrent.Callable;
 //@EnableScheduling
 @EnableHystrix
 @EnableHystrixDashboard
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @EnableFeignClients
 public class MsHelloApplication {
 
