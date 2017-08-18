@@ -3,9 +3,86 @@
 1.5.4-RELEASE DS Replicas must use yml or else properties can't show right
 #### 2、oauth2安全认证中心
 
+password
+
+用户的authorities与client的scope
+
     {exp=1502919015, user_name=marissa, authorities=[write], client_id=user, scope=[write, read]}
+    
+client_credential
+
+client的role与scope
+  
+    {scope=[write, read], exp=1503000079, authorities=[ROLE_CLIENT], client_id=ypp}
 
 可以看出来在check_token时返回的数据中，仅有的信息，user的authorities与client的
+
+~~~
+{
+    "authenticated": true,
+    "authorities": [
+        {
+            "authority": "write"
+        }
+    ],
+    "clientOnly": false,
+    "credentials": "",
+    "name": "marissa",
+    "oAuth2Request": {
+        "approved": true,
+        "authorities": [
+            {
+                "authority": "ROLE_CLIENT"
+            }
+        ],
+        "clientId": "user",
+        "extensions": {},
+        "grantType": "password",
+        "refresh": false,
+        "requestParameters": {
+            "grant_type": "password",
+            "username": "marissa"
+        },
+        "resourceIds": [],
+        "responseTypes": [],
+        "scope": [
+            "write",
+            "read"
+        ]
+    },
+    "principal": {
+        "accountNonExpired": true,
+        "accountNonLocked": true,
+        "authorities": [
+            {
+                "$ref": "$.authorities[0]"
+            }
+        ],
+        "credentialsNonExpired": true,
+        "enabled": true,
+        "username": "marissa"
+    },
+    "userAuthentication": {
+        "authenticated": true,
+        "authorities": [
+            {
+                "$ref": "$.authorities[0]"
+            }
+        ],
+        "details": {
+            "grant_type": "password",
+            "username": "marissa"
+        },
+        "name": "marissa",
+        "principal": {
+            "$ref": "$.principal"
+        }
+    }
+}
+~~~
+
+ScopeVoter
+ClientScopeVoter
 
 #### 3、sleuth链路跟踪
 #### 4、logstash日志收集

@@ -1,5 +1,6 @@
 package com.bao.controller;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -41,6 +42,9 @@ public class CheckTokenController {
         }
 
         OAuth2Authentication authentication = resourceServerTokenServices.loadAuthentication(token.getValue());
+
+        System.out.println(JSON.toJSONString(token));
+        System.out.println(JSON.toJSONString(authentication));
 
         Map<String, ?> response = accessTokenConverter.convertAccessToken(token, authentication);
 

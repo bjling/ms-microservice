@@ -14,6 +14,9 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * Created by user on 2016/11/8.
@@ -37,9 +40,17 @@ public class Oauth2Configuration extends AuthorizationServerConfigurerAdapter {
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
+//    @Bean
+//    public TokenStore tokenStore() {
+//        return new InMemoryTokenStore();
+//    }
+
+    @Autowired
+    private DataSource dataSource;
+
     @Bean
     public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
+        return new JdbcTokenStore(dataSource);
     }
 
     @Override
@@ -51,14 +62,14 @@ public class Oauth2Configuration extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("user")
-                .secret("password")
-                .authorizedGrantTypes("authorization_code", "refresh_token",
-                        "password", "client_credentials")
-                .authorities("ROLE_CLIENT")
-                .scopes("write", "read");
-//        clients.jdbc(DataSource);
+//        clients.inMemory()
+//                .withClient("user")
+//                .secret("password")
+//                .authorizedGrantTypes("authorization_code", "refresh_token",
+//                        "password", "client_credentials")
+//                .authorities("ROLE_CLIENT")
+//                .scopes("write", "read");
+        clients.jdbc(dataSource);
     }
 
     @Override

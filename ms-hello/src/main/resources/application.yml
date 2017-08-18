@@ -8,6 +8,7 @@ server:
 #      access-token-uri: http://localhost:9004/oauth/token
 #      user-authorization-uri: http://localhost:9004/oauth/authorize
 
+
 eureka:
   instance:
     prefer-ip-address: true
@@ -34,7 +35,12 @@ hystrix:
           thread:
             timeoutInMilliseconds: 20000
 logging:
-  level: debug
+  level:
+    root: debug
+
+
+
+
 
 #feign:
 #  okhttp:

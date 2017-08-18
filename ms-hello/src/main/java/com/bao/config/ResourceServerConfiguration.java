@@ -25,7 +25,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Bean
     public RemoteTokenServices remoteTokenServices(){
-        RemoteTokenServices services = new RemoteTokenServices();
+        MyRemoteTokenServices services = new MyRemoteTokenServices();
         services.setCheckTokenEndpointUrl("http://localhost:9004/oauth/check_token");
         return services;
     };
@@ -33,6 +33,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         resources.tokenServices(remoteTokenServices()).resourceId(appName).stateless(false);
+//        resources.resourceId(appName).stateless(false);
     }
 
     @Override
@@ -49,6 +50,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth").access("#oauth2.hasScope('read')")
+                .antMatchers("/test").access("#oauth2.hasScope('admin')")
+                .antMatchers("/base").access("#oauth2.clientHasRole('ROLE_CLIENT')")
 //                .antMatchers("/test").access("hasRole('USER')") //deny
 //                .antMatchers("/test").access("hasRole('ROLE_USER')") //deny
 //                .antMatchers("/test").access("#oauth2.clientHasRole('ROLE_CLIENT')") //deny

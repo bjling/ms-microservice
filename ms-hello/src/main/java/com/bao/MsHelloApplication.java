@@ -1,5 +1,6 @@
 package com.bao;
 
+import com.alibaba.fastjson.JSON;
 import com.bao.exception.BaseException;
 import com.bao.exception.constant.ExceptionLevelEnum;
 import com.bao.service.TestService;
@@ -18,8 +19,11 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.Callable;
@@ -79,11 +83,19 @@ public class MsHelloApplication {
     @GetMapping("/auth")
     public String auth() {
         log.info("auth");
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        System.out.println(JSON.toJSONString(authentication));
         return "auth";
     }
 
     @GetMapping("/test")
     public String test() {
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        System.out.println(JSON.toJSONString(authentication));
+        System.out.println(JSON.toJSONString(authentication.getDetails()));
+        System.out.println(JSON.toJSONString(authentication.getPrincipal()));
         return testService.test();
     }
 
