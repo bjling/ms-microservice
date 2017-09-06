@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpServerErrorException;
 
 @Slf4j
 @ControllerAdvice
@@ -18,6 +19,12 @@ public class GlobalExceptionHandler {
     public String handleBaseException(BaseException e) {
         log.error(e.getMessage());
         return "base exception";
+    }
+
+    @ExceptionHandler(value = HttpServerErrorException.class)
+    public String handleBaseException(HttpServerErrorException e) {
+        log.error(e.getMessage());
+        return "HttpServerErrorException exception";
     }
 
     @ExceptionHandler(value = Exception.class)

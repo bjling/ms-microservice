@@ -1,5 +1,6 @@
 package com.bao.config;
 
+import com.bao.exception.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -42,6 +43,7 @@ public class MyRemoteTokenServices extends RemoteTokenServices {
         if (map.containsKey("error")) {
             logger.debug("check_token returned error: " + map.get("error"));
             throw new InvalidTokenException(accessToken);
+//            throw new BaseException(accessToken);
         }
 
         Assert.state(map.containsKey("client_id"), "Client id must be present in response from auth server");

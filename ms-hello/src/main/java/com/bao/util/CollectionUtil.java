@@ -22,19 +22,25 @@ public class CollectionUtil {
 //            System.out.println(slice.size());
 //        });
 
-        String name = "test测试";
-        boolean flag = PatternMatchUtils.simpleMatch("^[\u4e00-\u9fa5a-zA-Z0-9_]*",name);
-        System.out.println(flag);
+//        String name = "test测试";
+//        boolean flag = PatternMatchUtils.simpleMatch("^[\u4e00-\u9fa5a-zA-Z0-9_]*",name);
+//        System.out.println(flag);
+//
+//        Pattern p = Pattern.compile("^[\u4e00-\u9fa5a-zA-Z0-9_]*");
+//
+//        Matcher m = p.matcher(name);
+//
+//
+//        System.out.println(m.matches());
+//
+//        String a = "B001:haha:test";
+//        String[] b = a.split(":");
+//        System.out.println(b[b.length-1]);
 
-        Pattern p = Pattern.compile("^[\u4e00-\u9fa5a-zA-Z0-9_]*");
+        int a = 332;
+        int b = 223;
+        int c= b*100/a;
+        System.out.println(c);
 
-        Matcher m = p.matcher(name);
-
-
-        System.out.println(m.matches());
-
-        String a = "B001:haha:test";
-        String[] b = a.split(":");
-        System.out.println(b[b.length-1]);
     }
 }
