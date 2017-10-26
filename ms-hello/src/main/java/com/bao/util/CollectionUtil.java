@@ -2,6 +2,7 @@ package com.bao.util;
 
 import com.google.common.collect.Lists;
 import org.springframework.util.PatternMatchUtils;
+import org.springframework.util.StopWatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
  * Created by baochunyu on 2017/3/1.
  */
 public class CollectionUtil {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 //        List<String> list = new ArrayList<>();
 //        for (int i = 0; i < 100; i++) {
 //            list.add(String.valueOf(i));
@@ -37,10 +38,23 @@ public class CollectionUtil {
 //        String[] b = a.split(":");
 //        System.out.println(b[b.length-1]);
 
-        int a = 332;
-        int b = 223;
-        int c= b*100/a;
-        System.out.println(c);
+//        int a = 332;
+//        int b = 223;
+//        int c= b*100/a;
+//        System.out.println(c);
+
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Thread.sleep(2000);
+        stopWatch.stop();
+        System.out.println(stopWatch.getTotalTimeSeconds());
+        stopWatch.start();
+        Thread.sleep(2000);
+        System.out.println(stopWatch.getTotalTimeSeconds());
+        stopWatch.stop();
+
+//        System.out.println("aaaa".getBytes().length);
+//        System.out.println("aaaa".length());
 
     }
 }
