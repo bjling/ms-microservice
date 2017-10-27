@@ -99,3 +99,28 @@ WantedBy=multi-user.target
 [systemd](https://docs.docker.com/engine/admin/systemd/#httphttps-proxy)
 
 3. [Ubuntu iptables](http://www.cnblogs.com/general0878/p/5757377.html)
+
+
+#### Docker container networking
+
+~~~
+$ docker network ls
+
+NETWORK ID          NAME                DRIVER
+7fca4eb8c647        bridge              bridge
+9f904ee27bf5        none                null
+cf03ee007fb4        host                host
+~~~
+
+由于docker默认使用bridge模式，注册到eureka的ip为docker虚拟的ip，需要使用etcd+flannel
+
+[DockOne技术分享（十八）：一篇文章带你了解Flannel](http://dockone.io/article/618)
+[容器网络聚焦：CNM和CNI](http://www.dockerinfo.net/3772.html)
+
+Flannel是 CoreOS 团队针对 Kubernetes 设计的一个覆盖网络（Overlay Network）工具，其目的在于帮助每一个使用 Kuberentes 的 CoreOS 主机拥有一个完整的子网。这次的分享内容将从Flannel的介绍、工作原理及安装和配置三方面来介绍这个工具的使用方法。
+
+@卫庄   我前段时间撸了一段时间docker源码发现网络的部分提供的解决方案只有那些，你可以看下CNI那块。  我个人认为如果你现有网络允许的情况下 你就用calico这种BGP 边界网关协议（BGP） 的东西，如果你现有网络不好搞 你就弄用vxlan
+
+host还行吧 我们（美团）这边也是host  b站也是host 当然有技术能力 人力还是cni啊
+
+迭代 mvp 先docker化 再自动化 再平台化 
