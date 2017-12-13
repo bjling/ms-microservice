@@ -124,3 +124,7 @@ Flannel是 CoreOS 团队针对 Kubernetes 设计的一个覆盖网络（Overlay 
 host还行吧 我们（美团）这边也是host  b站也是host 当然有技术能力 人力还是cni啊
 
 迭代 mvp 先docker化 再自动化 再平台化 
+
+
+Docker provides default network drivers for creating these networks. You can create a new bridge network, overlay network or MACVLAN network. You can also create a network plugin or remote network for complete customization and control.
+
