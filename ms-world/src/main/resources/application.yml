@@ -56,3 +56,14 @@ hystrix:
 mybatis:
   type-aliases-package: com.bao.model
   mapper-locations: classpath*:mapper/*Mapper.xml
+management:
+  security:
+    enabled: false
+endpoints:
+  pause:
+    sensitive: false
+  shutdown:
+    sensitive: false
+    enabled: true
+  metrics:
+    sensitive: false

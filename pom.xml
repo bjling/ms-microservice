@@ -64,6 +64,7 @@
             <artifactId>logstash-logback-encoder</artifactId>
             <version>4.7</version>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>

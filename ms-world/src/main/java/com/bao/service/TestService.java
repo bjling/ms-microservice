@@ -7,6 +7,7 @@ import com.bao.model.TOrderItem;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,5 +50,12 @@ public class TestService {
 
     public void test2(){
         orderService.test1();
+    }
+
+
+    @Async
+    public void asyn(){
+        log.info("i am asyn");
+        System.out.println("=====");
     }
 }

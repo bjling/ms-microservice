@@ -66,3 +66,31 @@ runoob
 当执行 "git checkout ." 或者 "git checkout -- <file>" 命令时，会用暂存区全部或指定的文件替换工作区的文件。这个操作很危险，会清除工作区中未添加到暂存区的改动。
 
 当执行 "git checkout HEAD ." 或者 "git checkout HEAD <file>" 命令时，会用 HEAD 指向的 master 分支中的全部或者部分文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动。
+
+
+
+git clone默认会把远程仓库整个给clone下来，但只会在本地默认创建一个master分支。要想单独clone某一分支方法如下：
+方法一：
+```
+git clone -b 分支名字 URL
+
+```
+方法二：
+git branch -a查看所有分支:
+```
+* master
+remotes/origin/HEAD -> origin/master
+remotes/origin/dev
+```
+假设我们现在想取dev分支到本地并自动建立tracking有两种方式:
+git checkout -b dev origin/dev
+
+-b dev表示在本地新建一个叫dev的分支，与远程的origin/dev对应。
+git checkout -t origin/magicvoid
+-t参数默认会在本地建立一个和远程分支一样名字的分支。
+
+![error: RPC failed; curl 18 transfer closed with outstanding read data remaining](http://blog.csdn.net/drift_axe/article/details/54924359)
+
+```
+git config http.postBuffer 1524288000
+```
